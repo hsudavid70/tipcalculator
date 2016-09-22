@@ -1,4 +1,4 @@
-e
+tipcalculator
 rk - *Name of App Here*
 
 **Name of your app** is a tip calculator application for iOS.
