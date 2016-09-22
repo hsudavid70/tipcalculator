@@ -31,10 +31,20 @@ class SettingsViewController: UIViewController {
         super.viewWillDisappear(animated)
         print("view will disappear")
         // save selected tip
+       
         defaults.setInteger(defTipSelect.selectedSegmentIndex, forKey: "def_tip_index")
-        defaults.synchronize()
     }
-    // check if preference keys exist, if not , set default value to 10 %
+    
+    override func viewWillAppear(animated: Bool){
+        self.defTipSelect.alpha = 0
+        UIView.animateWithDuration(0.7, animations: {
+            // This causes first view to fade in and second view to fade out
+            
+            self.defTipSelect.alpha = 1
+        })
+    }
+    
+        // check if preference keys exist, if not , set default value to 10 %
     
     func getDefTip()->Int{
         

@@ -32,8 +32,16 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+                // get stored/default tip percent and update
+        self.billField.alpha = 0
+        self.tipSelect.alpha = 0
+        UIView.animateWithDuration(0.7, animations: {
+            // This causes first view to fade in and second view to fade out
+            
+            self.billField.alpha = 1
+            self.tipSelect.alpha = 1
+        })
         
-        // get stored/default tip percent and update 
         tipSelect.selectedSegmentIndex = getDefTip()
         update_bill()
     }
