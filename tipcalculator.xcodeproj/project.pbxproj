@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4924EBE11D93535B001A2290 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924EBE01D93535B001A2290 /* SettingsViewController.swift */; };
 		492CA5CC1D926DF80046AC69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492CA5CB1D926DF80046AC69 /* AppDelegate.swift */; };
 		492CA5CE1D926DF80046AC69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492CA5CD1D926DF80046AC69 /* ViewController.swift */; };
 		492CA5D11D926DF80046AC69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492CA5CF1D926DF80046AC69 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4924EBE01D93535B001A2290 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		492CA5C61D926DF80046AC69 /* tipcalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tipcalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492CA5CA1D926DF80046AC69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		492CA5CB1D926DF80046AC69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		492CA5C81D926DF80046AC69 /* tipcalculator */ = {
 			isa = PBXGroup;
 			children = (
+				4924EBE01D93535B001A2290 /* SettingsViewController.swift */,
 				492CA5CB1D926DF80046AC69 /* AppDelegate.swift */,
 				492CA5CD1D926DF80046AC69 /* ViewController.swift */,
 				492CA5CF1D926DF80046AC69 /* Main.storyboard */,
@@ -214,6 +217,7 @@
 			files = (
 				492CA5CE1D926DF80046AC69 /* ViewController.swift in Sources */,
 				492CA5CC1D926DF80046AC69 /* AppDelegate.swift in Sources */,
+				4924EBE11D93535B001A2290 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				492CA5E71D926DF80046AC69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		492CA5E81D926DF80046AC69 /* Build configuration list for PBXNativeTarget "tipcalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				492CA5EA1D926DF80046AC69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
