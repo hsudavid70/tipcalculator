@@ -21,10 +21,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-      
+    
+      // set first responder for bill
+      self.billField.becomeFirstResponder()
    
         
        
