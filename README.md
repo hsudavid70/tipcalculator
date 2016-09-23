@@ -19,8 +19,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [X] List anything else that you can get done to improve the app functionality!
-  Light/Dark color themes with switch in settings view
+- [X] Light/Dark color themes with switch in settings view
 
 ## Video Walkthrough 
 
@@ -36,7 +35,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [David Hsu]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
