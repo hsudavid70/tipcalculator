@@ -12,13 +12,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uxn-ay-vxB">
-                                <rect key="frame" x="22" y="178" width="24" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K6b-Bu-1SK">
                                 <rect key="frame" x="22" y="273" width="37" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="Kcu-I3-zwy">
-                                <rect key="frame" x="16" y="231" width="288" height="16"/>
+                                <rect key="frame" x="16" y="232" width="288" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -73,6 +66,13 @@
                                     <action selector="calcTip:" destination="vXZ-lx-hvc" eventType="editingChanged" id="zzs-yr-L0b"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uxn-ay-vxB">
+                                <rect key="frame" x="22" y="178" width="24" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -89,9 +89,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="8yT-bX-lpo" id="IZB-dN-Y2N"/>
-                        <outlet property="tipLabel" destination="i7b-nL-MVW" id="bHv-JH-nj0"/>
+                        <outlet property="billLabel" destination="XQ2-sj-W2o" id="gA3-6c-cdR"/>
+                        <outlet property="divider" destination="Kcu-I3-zwy" id="zXP-vc-XeS"/>
+                        <outlet property="tipLabel" destination="uxn-ay-vxB" id="YVA-xw-YbL"/>
                         <outlet property="tipSelect" destination="RRC-7P-2RA" id="xCx-Ov-DQd"/>
-                        <outlet property="totalLabel" destination="wiA-tn-VgX" id="UKc-8u-R9R"/>
+                        <outlet property="tipValLabel" destination="i7b-nL-MVW" id="86Q-YI-a7N"/>
+                        <outlet property="totalLabel" destination="K6b-Bu-1SK" id="OYf-JR-19R"/>
+                        <outlet property="totalValLabel" destination="wiA-tn-VgX" id="sTu-0p-tNU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -118,6 +122,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme select" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MS6-Rd-aAy">
+                                <rect key="frame" x="109" y="171" width="103" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W5S-E8-Hkh">
                                 <rect key="frame" x="139" y="82" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -134,24 +145,35 @@
                                     <segment title="30%"/>
                                 </segments>
                             </segmentedControl>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="B7A-gg-LYj">
+                                <rect key="frame" x="221" y="205" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onSwitch:" destination="jFV-JL-luG" eventType="valueChanged" id="Cas-yh-guF"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Light theme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xWU-2S-lk0">
+                                <rect key="frame" x="41" y="210" width="134" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="contentStretch" x="0.0" y="0.15000000000000002" width="1" height="1"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="zEE-Pp-c3y" appends="YES" id="2jQ-5r-xpK"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="0jT-SH-dBB"/>
                     <connections>
                         <outlet property="defTipSelect" destination="ibl-iX-dJL" id="shV-HJ-ukc"/>
+                        <outlet property="label1" destination="qsu-oo-v1z" id="I4c-vV-Pe9"/>
+                        <outlet property="label2" destination="MS6-Rd-aAy" id="KVj-va-mGi"/>
+                        <outlet property="themeLabel" destination="xWU-2S-lk0" id="L7n-KX-Z5Y"/>
+                        <outlet property="themeSwitch" destination="B7A-gg-LYj" id="Hei-ZF-jAG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9b3-3X-qHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="zEE-Pp-c3y">
-                    <connections>
-                        <action selector="onTap:" destination="jFV-JL-luG" id="OK1-YJ-MC4"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="769" y="398"/>
         </scene>

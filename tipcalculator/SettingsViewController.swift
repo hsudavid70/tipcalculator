@@ -12,16 +12,18 @@ class SettingsViewController: UIViewController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var themeSwitch: UISwitch!
     @IBOutlet weak var defTipSelect: UISegmentedControl!
-  
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         defTipSelect.selectedSegmentIndex = getDefTip()
+       
     }
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,13 +38,21 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool){
-        self.defTipSelect.alpha = 0
+        
+        self.view.alpha = 0
         UIView.animateWithDuration(0.7, animations: {
-            // This causes first view to fade in and second view to fade out
-            
-            self.defTipSelect.alpha = 1
+            self.view.alpha = 1
         })
-    }
+        var colorTheme = defaults.stringForKey("tipColorTheme") ?? "Light"
+        if (colorTheme == "Light"){
+            themeSwitch.on = false
+            lightColorTheme()
+        }
+        else{
+            themeSwitch.on = true
+            darkColorTheme()
+        }
+        themeLabel.text = "\(colorTheme) theme"    }
     
         // check if preference keys exist, if not , set default value to 10 %
     
@@ -63,7 +73,38 @@ class SettingsViewController: UIViewController {
         return defaults.objectForKey(userKey) != nil
     }
     
+    
+    func lightColorTheme(){
+        self.view.backgroundColor = UIColor(red:1.0,green:1.0,blue:1.0,alpha:1.0);
+        themeLabel.textColor = UIColor.blackColor()
+        label1.textColor = UIColor.blackColor()
+        label2.textColor = UIColor.blackColor()
+        
+    }
+    
+    func darkColorTheme(){
+       
+        self.view.backgroundColor = UIColor(red:0.1,green:0.1,blue:0.1,alpha:1.0);
+        themeLabel.textColor = UIColor.whiteColor()
+        label1.textColor = UIColor.whiteColor()
+        label2.textColor = UIColor.whiteColor()
+       
+    }
    
+    @IBAction func onSwitch(sender: UISwitch) {
+        print("switched")
+        if(themeSwitch.on){
+            defaults.setObject("Dark",forKey: "tipColorTheme")
+            defaults.synchronize()
+            themeLabel.text="Dark Theme"
+            darkColorTheme()
+        }
+        else{
+            defaults.setObject("Light",forKey: "tipColorTheme")
+            defaults.synchronize()
+            themeLabel.text="Light Theme"
+            lightColorTheme()        }
+    }
   
 
 }
