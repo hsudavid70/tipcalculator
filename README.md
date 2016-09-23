@@ -2,7 +2,7 @@ tipcalculator
 
 Submitted by: David Hsu
 
-Time spent: 4 hours
+Time spent: 8 hours
 
 ## User Stories
 
@@ -19,13 +19,14 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] List anything else that you can get done to improve the app functionality!
+  Light/Dark color themes with switch in settings view
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/Znwp0Fa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/icYlcXV.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
