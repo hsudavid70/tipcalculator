@@ -2,7 +2,7 @@ tipcalculator
 
 Submitted by: David Hsu
 
-Time spent: 8 hours
+Time spent: 10 hours
 
 ## User Stories
 
