@@ -9,100 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "tipcalculator/ViewController.swift"
-            timestampString = "496196164.837473"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
-            landmarkName = "ViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tipcalculator/SettingsViewController.swift"
-            timestampString = "496297564.673045"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "SettingsViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tipcalculator.SettingsViewController.defTipSelect.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UISegmentedControl&gt;"
-                  moduleName = "tipcalculator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidhsu/Desktop/tipcalculator/tipcalculator/SettingsViewController.swift"
-                  timestampString = "496299977.576041"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tipcalculator.SettingsViewController.defTipSelect.materializeForSet : weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UISegmentedControl&gt;"
-                  moduleName = "tipcalculator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidhsu/Desktop/tipcalculator/tipcalculator/SettingsViewController.swift"
-                  timestampString = "496299977.576303"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tipcalculator.SettingsViewController.init (tipcalculator.SettingsViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; tipcalculator.SettingsViewController"
-                  moduleName = "tipcalculator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidhsu/Desktop/tipcalculator/tipcalculator/SettingsViewController.swift"
-                  timestampString = "496299977.576412"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "395">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tipcalculator.SettingsViewController.init (tipcalculator.SettingsViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; tipcalculator.SettingsViewController"
-                  moduleName = "tipcalculator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidhsu/Desktop/tipcalculator/tipcalculator/SettingsViewController.swift"
-                  timestampString = "496299977.576517"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "308">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "tipcalculator/SettingsViewController.swift"
             timestampString = "496297815.247769"
             startingColumnNumber = "9223372036854775807"
@@ -120,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tipcalculator/ViewController.swift"
-            timestampString = "496299672.400321"
+            timestampString = "496387221.56244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "getDefTip()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

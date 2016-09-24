@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
 
     let defaults = NSUserDefaults.standardUserDefaults()
+    var numFormatter = NSNumberFormatter()
+ 
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
     @IBOutlet weak var billField: UITextField!
@@ -20,19 +22,35 @@ class ViewController: UIViewController {
     @IBOutlet weak var billLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var keyInputField: UITextField!
     
     override func viewDidLoad() {
-      super.viewDidLoad()
-      // Do any additional setup after loading the view, typically from a nib.
-    
-      // set first responder for bill
-      self.billField.becomeFirstResponder()
+        println("lifecycle: viewDidLoad")
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "localeChanged:",
+            name: NSCurrentLocaleDidChangeNotification,
+            object: nil)
         
+        // Do any additional setup after loading the view, typically from a nib.
+        numFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        numFormatter.locale = NSLocale.currentLocale()
+        //numFormatter.minimumFractionDigits = 2
+        numFormatter.maximumFractionDigits = 2
+        // set first responder for bill
+        self.keyInputField.becomeFirstResponder()
+        billField.text = numFormatter.stringFromNumber(0)
+        tipValLabel.text = numFormatter.stringFromNumber(0)
+        totalValLabel.text = numFormatter.stringFromNumber(0)
     }
     
     override func viewWillAppear(animated: Bool) {
+        println("lifecycle: viewDidLoad")
         super.viewWillAppear(animated)
-                // get stored/default tip percent and update
+        // load locale
+       
+        // get stored/default tip percent and update
         self.billField.alpha = 0
         self.tipSelect.alpha = 0
         
@@ -95,7 +113,7 @@ class ViewController: UIViewController {
         divider.backgroundColor = UIColor.blackColor()
         tipValLabel.textColor = UIColor.blackColor()
         totalValLabel.textColor = UIColor.blackColor()
-         billLabel.textColor = UIColor.blackColor()
+        billLabel.textColor = UIColor.blackColor()
         tipLabel.textColor = UIColor.blackColor()
         totalLabel.textColor = UIColor.blackColor()
        
@@ -120,14 +138,33 @@ class ViewController: UIViewController {
     }
     
     func update_bill(){
-        let tipPercents = [0.10,0.20,0.30]
-        // The String->Double conversion for Swift 1.2
-        let bill = (billField.text as NSString).doubleValue
-        let tip = bill * tipPercents[tipSelect.selectedSegmentIndex];
-        let total = bill + tip;
         
-        tipValLabel.text = String(format: "$%.2f", tip)
-        totalValLabel.text = String(format: "$%.2f", total)
+        let tipPercents = [0.10,0.20,0.30]
+      
+       
+        // The String->Double conversion for Swift 1.2
+     
+        let keyInputVal = (keyInputField.text as NSString).doubleValue
+       
+        //println(numFormatter.stringFromNumber(bill/100))
+      
+        /*
+        if(){
+            bill = 0
+        }else{
+            bill = numFormatter.numberFromString(billField.text) as Double
+        }
+        */
+        let tip = keyInputVal/100 * tipPercents[tipSelect.selectedSegmentIndex]
+        let total = keyInputVal/100 + tip;
+        
+//        tipValLabel.text = String(format: "$%.2f", tip)
+//        totalValLabel.text = String(format: "$%.2f", total)
+        billField.text = numFormatter.stringFromNumber(keyInputVal/100)
+    
+        tipValLabel.text = numFormatter.stringFromNumber(tip)
+        totalValLabel.text = numFormatter.stringFromNumber(total)
+        
     }
     
     
@@ -137,9 +174,19 @@ class ViewController: UIViewController {
   
     @IBAction func calcTip(sender: AnyObject) {
        
-       update_bill()
-        
+        if (count(keyInputField.text) > 10) {
+            keyInputField.deleteBackward()
+        }
+        update_bill()
+       //billField.resignFirstResponder()
     }
 
+    func localeChanged(notification: NSNotification) {
+        println("locale changed")
+        numFormatter.locale = NSLocale.currentLocale()
+        update_bill()
+    }
+  
+   
 }
 

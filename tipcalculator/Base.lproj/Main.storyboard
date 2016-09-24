@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="           $0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wiA-tn-VgX">
-                                <rect key="frame" x="190" y="273" width="96" height="21"/>
+                                <rect key="frame" x="131" y="273" width="155" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="           $0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i7b-nL-MVW">
-                                <rect key="frame" x="189" y="178" width="96" height="21"/>
+                                <rect key="frame" x="131" y="178" width="154" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,9 +62,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                <connections>
-                                    <action selector="calcTip:" destination="vXZ-lx-hvc" eventType="editingChanged" id="zzs-yr-L0b"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uxn-ay-vxB">
                                 <rect key="frame" x="22" y="178" width="24" height="21"/>
@@ -73,6 +70,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wrl-P4-9KI">
+                                <rect key="frame" x="112" y="474" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="calcTip:" destination="vXZ-lx-hvc" eventType="editingChanged" id="xIP-ad-gD0"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -91,6 +97,7 @@
                         <outlet property="billField" destination="8yT-bX-lpo" id="IZB-dN-Y2N"/>
                         <outlet property="billLabel" destination="XQ2-sj-W2o" id="gA3-6c-cdR"/>
                         <outlet property="divider" destination="Kcu-I3-zwy" id="zXP-vc-XeS"/>
+                        <outlet property="keyInputField" destination="wrl-P4-9KI" id="wKR-Er-DOA"/>
                         <outlet property="tipLabel" destination="uxn-ay-vxB" id="YVA-xw-YbL"/>
                         <outlet property="tipSelect" destination="RRC-7P-2RA" id="xCx-Ov-DQd"/>
                         <outlet property="tipValLabel" destination="i7b-nL-MVW" id="86Q-YI-a7N"/>
