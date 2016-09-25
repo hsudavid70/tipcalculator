@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let defaults = NSUserDefaults.standardUserDefaults()
-    var numFormatter = NSNumberFormatter()
+    let numFormatter = NSNumberFormatter()
  
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
@@ -25,12 +25,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var keyInputField: UITextField!
     
     override func viewDidLoad() {
-        println("lifecycle: viewDidLoad")
+        let timeviewDidLoad = Int(NSDate().timeIntervalSince1970)
+        println("lifecycle: viewDidLoad \(timeviewDidLoad)")
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "localeChanged:",
             name: NSCurrentLocaleDidChangeNotification,
+            object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "willTerminate:",
+            name: UIApplicationWillTerminateNotification,
             object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,9 +47,18 @@ class ViewController: UIViewController {
         numFormatter.maximumFractionDigits = 2
         // set first responder for bill
         self.keyInputField.becomeFirstResponder()
-        billField.text = numFormatter.stringFromNumber(0)
-        tipValLabel.text = numFormatter.stringFromNumber(0)
-        totalValLabel.text = numFormatter.stringFromNumber(0)
+        let lastStoppedTime = getStoppedTime()
+        // check for stored app stopped time and 10 min interval
+        if(lastStoppedTime != 0 && (timeviewDidLoad - lastStoppedTime) < 600){
+            // load from saved state
+            keyInputField.text = defaults.stringForKey("savedInput")
+        }
+        else{
+            // init everything to 0
+            billField.text = numFormatter.stringFromNumber(0)
+            tipValLabel.text = numFormatter.stringFromNumber(0)
+            totalValLabel.text = numFormatter.stringFromNumber(0)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -96,6 +112,17 @@ class ViewController: UIViewController {
         }
     }
     
+    // get stopped time with check
+    
+    func getStoppedTime()->Int{
+        if(checkKey("lastStoppedTime")){
+            return defaults.objectForKey("lastStoppedTime") as! Int
+        }
+        else{
+            return 0
+        }
+    }
+    
     // check if key exists
     
     func checkKey(userKey:String)->Bool{
@@ -140,28 +167,13 @@ class ViewController: UIViewController {
     func update_bill(){
         
         let tipPercents = [0.10,0.20,0.30]
-      
-       
+        
         // The String->Double conversion for Swift 1.2
-     
         let keyInputVal = (keyInputField.text as NSString).doubleValue
-       
-        //println(numFormatter.stringFromNumber(bill/100))
-      
-        /*
-        if(){
-            bill = 0
-        }else{
-            bill = numFormatter.numberFromString(billField.text) as Double
-        }
-        */
         let tip = keyInputVal/100 * tipPercents[tipSelect.selectedSegmentIndex]
         let total = keyInputVal/100 + tip;
-        
-//        tipValLabel.text = String(format: "$%.2f", tip)
-//        totalValLabel.text = String(format: "$%.2f", total)
+
         billField.text = numFormatter.stringFromNumber(keyInputVal/100)
-    
         tipValLabel.text = numFormatter.stringFromNumber(tip)
         totalValLabel.text = numFormatter.stringFromNumber(total)
         
@@ -178,8 +190,10 @@ class ViewController: UIViewController {
             keyInputField.deleteBackward()
         }
         update_bill()
-       //billField.resignFirstResponder()
+     
     }
+    
+    // life cycle event handler
 
     func localeChanged(notification: NSNotification) {
         println("locale changed")
@@ -187,6 +201,15 @@ class ViewController: UIViewController {
         update_bill()
     }
   
-   
+    
+    func willTerminate(notification: NSNotification){
+         // get time in unix epoch time to the nearest seconds
+         let timeTerminate = Int(NSDate().timeIntervalSince1970)
+         println("lifecycle: willTerminate \(timeTerminate)")
+         // save current input
+         defaults.setInteger(timeTerminate, forKey: "lastStoppedTime")
+         defaults.setObject(keyInputField.text, forKey:"savedInput")
+         defaults.synchronize()
+        
+    }
 }
-
