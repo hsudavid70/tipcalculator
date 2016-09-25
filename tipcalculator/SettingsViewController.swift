@@ -11,6 +11,8 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    var lastSelected : Int = 0
+  
     
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -19,22 +21,32 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var defTipSelect: UISegmentedControl!
     
     override func viewDidLoad() {
+        println("lifcycle: (Settings) viewDidLoad")
         super.viewDidLoad()
-        defTipSelect.selectedSegmentIndex = getDefTip()
-       
+        lastSelected = getDefTip()
+        println("lastselected \(lastSelected)")
+        defTipSelect.selectedSegmentIndex = lastSelected
     }
  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        print("view will disappear")
-        // save selected tip
+        println("lifecycle:(Settings) view will disappear")
+        // if tip rate selection changed, invalidate saved index by setting it to -1
+        if( defTipSelect.selectedSegmentIndex != lastSelected){
+            println("reset")
+            defaults.setInteger(-1, forKey: "savedSegIndex")
+            defaults.setInteger(defTipSelect.selectedSegmentIndex, forKey: "def_tip_index")
+            defaults.synchronize()
+        }
        
-        defaults.setInteger(defTipSelect.selectedSegmentIndex, forKey: "def_tip_index")
+        println("(Settings) saved \(defTipSelect.selectedSegmentIndex)")
+        
     }
     
     override func viewWillAppear(animated: Bool){
@@ -105,6 +117,4 @@ class SettingsViewController: UIViewController {
             themeLabel.text="Light Theme"
             lightColorTheme()        }
     }
-  
-
 }

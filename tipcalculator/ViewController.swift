@@ -12,7 +12,6 @@ class ViewController: UIViewController {
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let numFormatter = NSNumberFormatter()
- 
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
     @IBOutlet weak var billField: UITextField!
@@ -26,7 +25,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         let timeviewDidLoad = Int(NSDate().timeIntervalSince1970)
-        println("lifecycle: viewDidLoad \(timeviewDidLoad)")
+        println("lifecycle: (Main) viewDidLoad \(timeviewDidLoad)")
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -48,10 +47,20 @@ class ViewController: UIViewController {
         // set first responder for bill
         self.keyInputField.becomeFirstResponder()
         let lastStoppedTime = getStoppedTime()
+        
+        let savedSegIndex = getSavedTip()
+       
+        // check for invalidated segmentselect index
+        if(savedSegIndex != -1){
+             println("restored saved segment select")
+             tipSelect.selectedSegmentIndex = savedSegIndex
+        }
+        
         // check for stored app stopped time and 10 min interval
         if(lastStoppedTime != 0 && (timeviewDidLoad - lastStoppedTime) < 600){
             // load from saved state
             keyInputField.text = defaults.stringForKey("savedInput")
+            
         }
         else{
             // init everything to 0
@@ -62,7 +71,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        println("lifecycle: viewDidLoad")
+        println("lifecycle: viewWillAppear")
         super.viewWillAppear(animated)
         // load locale
        
@@ -89,10 +98,27 @@ class ViewController: UIViewController {
             darkColorTheme()
         }
         
-        tipSelect.selectedSegmentIndex = getDefTip()
+        let savedIndex = getSavedTip()
+        /* index is set to -1 to indicate reset or indeterminate state.  The default selection will be loaded */
+        if(savedIndex != -1){
+            tipSelect.selectedSegmentIndex = getSavedTip()
+        }
+        else{
+            tipSelect.selectedSegmentIndex = getDefTip()
+        }
         update_bill()
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        println("lifecycle:(Main) view will disappear")
+        
+        defaults.setInteger(tipSelect.selectedSegmentIndex, forKey: "savedSegIndex")
+        defaults.synchronize()
+        println("(Main) saved \(tipSelect.selectedSegmentIndex)")
+       
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -119,6 +145,20 @@ class ViewController: UIViewController {
             return defaults.objectForKey("lastStoppedTime") as! Int
         }
         else{
+            return 0
+        }
+    }
+    
+    // get saved segment select index
+    
+    func getSavedTip()->Int{
+        
+        if(checkKey("savedSegIndex")){
+            return defaults.objectForKey("savedSegIndex") as! Int
+        }
+        else{
+            defaults.setInteger(-1, forKey: "savedSegIndex")
+            defaults.synchronize()
             return 0
         }
     }
@@ -206,9 +246,10 @@ class ViewController: UIViewController {
          // get time in unix epoch time to the nearest seconds
          let timeTerminate = Int(NSDate().timeIntervalSince1970)
          println("lifecycle: willTerminate \(timeTerminate)")
-         // save current input
+         // save the termination time, user input, selected index
          defaults.setInteger(timeTerminate, forKey: "lastStoppedTime")
          defaults.setObject(keyInputField.text, forKey:"savedInput")
+         defaults.setInteger(tipSelect.selectedSegmentIndex, forKey: "savedSegIndex")
          defaults.synchronize()
         
     }
