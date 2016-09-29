@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     let numFormatter = NSNumberFormatter()
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
+    @IBOutlet weak var tipStepper: UIStepper!
+    @IBOutlet weak var peopleStepper: UIStepper!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var tipValLabel: UILabel!
     @IBOutlet weak var totalValLabel: UILabel!
@@ -22,6 +24,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var keyInputField: UITextField!
+    @IBOutlet weak var tipRateLabel: UILabel!
+    @IBOutlet weak var numPeopleLabel: UILabel!
+    @IBOutlet weak var tipRateValLabel: UILabel!
+    @IBOutlet weak var numPeopleValLabel: UILabel!
     
     override func viewDidLoad() {
         let timeviewDidLoad = Int(NSDate().timeIntervalSince1970)
@@ -183,6 +189,10 @@ class ViewController: UIViewController {
         billLabel.textColor = UIColor.blackColor()
         tipLabel.textColor = UIColor.blackColor()
         totalLabel.textColor = UIColor.blackColor()
+        tipRateLabel.textColor = UIColor.blackColor()
+        tipRateValLabel.textColor = UIColor.blackColor()
+        numPeopleLabel.textColor = UIColor.blackColor()
+        numPeopleValLabel.textColor = UIColor.blackColor()
        
         
     }
@@ -201,21 +211,27 @@ class ViewController: UIViewController {
         billLabel.textColor = UIColor.whiteColor()
         tipLabel.textColor = UIColor.whiteColor()
         totalLabel.textColor = UIColor.whiteColor()
-        
+        tipRateLabel.textColor = UIColor.whiteColor()
+        tipRateValLabel.textColor = UIColor.whiteColor()
+        numPeopleLabel.textColor = UIColor.whiteColor()
+        numPeopleValLabel.textColor = UIColor.whiteColor()
     }
     
     func update_bill(){
         
-        let tipPercents = [0.10,0.20,0.30]
+        
         
         // The String->Double conversion for Swift 1.2
         let keyInputVal = (keyInputField.text as NSString).doubleValue
-        let tip = keyInputVal/100 * tipPercents[tipSelect.selectedSegmentIndex]
+        let tip = keyInputVal/100 * tipStepper.value/100
         let total = keyInputVal/100 + tip;
 
         billField.text = numFormatter.stringFromNumber(keyInputVal/100)
-        tipValLabel.text = numFormatter.stringFromNumber(tip)
-        totalValLabel.text = numFormatter.stringFromNumber(total)
+        tipValLabel.text = numFormatter.stringFromNumber(tip/Double(peopleStepper.value))
+        totalValLabel.text = numFormatter.stringFromNumber(total/Double(peopleStepper.value))
+        
+        tipLabel.text = Int(peopleStepper.value) > 1 ? "Tip/pers." : "Tip"
+        totalLabel.text = Int(peopleStepper.value) > 1 ? "Total/pers." : "Total"
         
     }
     
@@ -233,6 +249,22 @@ class ViewController: UIViewController {
      
     }
     
+    @IBAction func tipStepperChanged(sender: UIStepper) {
+        tipRateValLabel.text = Int(sender.value).description + "%"
+        update_bill()
+    }
+    
+    @IBAction func peopleStepperChanged(sender: UIStepper) {
+        numPeopleValLabel.text = Int(sender.value).description
+        update_bill()
+    }
+    
+    @IBAction func segValueChanged(sender: UISegmentedControl) {
+        let tipPercents = [10,20,30]
+        tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
+        update_bill()
+        
+    }
     // life cycle event handler
 
     func localeChanged(notification: NSNotification) {
