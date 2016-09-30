@@ -128,37 +128,45 @@ class SettingsViewController: UIViewController {
     @IBAction func lowSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(lowSlider.value*100))
         lowSlideLabel.text = sliderVal + "%"
+        defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)
         if(lowSlider.value >= midSlider.value){
             midSlider.value = lowSlider.value
             midSlideLabel.text = String(Int(midSlider.value*100)) + "%"
+            defTipSelect.setTitle(midSlideLabel.text,forSegmentAtIndex:1)
         }
         if(lowSlider.value >= maxSlider.value){
             maxSlider.value = lowSlider.value
             maxSlideLabel.text = String(Int(maxSlider.value*100)) + "%"
+            defTipSelect.setTitle(maxSlideLabel.text,forSegmentAtIndex:2)
         }
     }
     @IBAction func midSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(midSlider.value*100))
         midSlideLabel.text = sliderVal + "%"
+        defTipSelect.setTitle(midSlideLabel.text,forSegmentAtIndex:1)
         if(midSlider.value >= maxSlider.value){
             maxSlider.value = midSlider.value
             maxSlideLabel.text = String(Int(maxSlider.value*100)) + "%"
+            defTipSelect.setTitle(maxSlideLabel.text,forSegmentAtIndex:2)
         }
         if(midSlider.value <= lowSlider.value){
             lowSlider.value = midSlider.value
             lowSlideLabel.text = String(Int(lowSlider.value*100)) + "%"
+            defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)
         }
     }
     @IBAction func maxSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(maxSlider.value*100))
         maxSlideLabel.text = sliderVal + "%"
+        defTipSelect.setTitle(maxSlideLabel.text,forSegmentAtIndex:2)
         if(maxSlider.value <= midSlider.value){
             midSlider.value = maxSlider.value
             midSlideLabel.text = String(Int(midSlider.value*100)) + "%"
+            defTipSelect.setTitle(midSlideLabel.text,forSegmentAtIndex:1)
         }
         if(maxSlider.value <= lowSlider.value){
             lowSlider.value = maxSlider.value
             lowSlideLabel.text = String(Int(lowSlider.value*100)) + "%"
-        }
+            defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)        }
     }
 }
