@@ -95,8 +95,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4eG-D9-xgT">
-                                <rect key="frame" x="126" y="230" width="37" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4eG-D9-xgT">
+                                <rect key="frame" x="101" y="230" width="62" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -214,6 +214,48 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.10000000000000001" maxValue="0.98999999999999999" id="fdW-eO-msK">
+                                <rect key="frame" x="24" y="274" width="266" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="lowSlideChanged:" destination="jFV-JL-luG" eventType="valueChanged" id="kU0-Gu-RcA"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000000000001" minValue="0.10000000000000001" maxValue="0.98999999999999999" id="da8-J4-hIn">
+                                <rect key="frame" x="27" y="351" width="266" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="midSlideChanged:" destination="jFV-JL-luG" eventType="valueChanged" id="r4j-pW-IXJ"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.10000000000000001" maxValue="0.98999999999999999" id="EkV-LI-Mgg">
+                                <rect key="frame" x="27" y="431" width="266" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="maxSlideChanged:" destination="jFV-JL-luG" eventType="valueChanged" id="yK7-N6-UTF"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XLn-JW-waw">
+                                <rect key="frame" x="139" y="402" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eau-9g-MtG">
+                                <rect key="frame" x="139" y="322" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PER-7t-vO8">
+                                <rect key="frame" x="139" y="245" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <rect key="contentStretch" x="0.0" y="0.15000000000000002" width="1" height="1"/>
@@ -224,6 +266,12 @@
                         <outlet property="defTipSelect" destination="ibl-iX-dJL" id="shV-HJ-ukc"/>
                         <outlet property="label1" destination="qsu-oo-v1z" id="I4c-vV-Pe9"/>
                         <outlet property="label2" destination="MS6-Rd-aAy" id="KVj-va-mGi"/>
+                        <outlet property="lowSlideLabel" destination="PER-7t-vO8" id="BcU-YH-sNv"/>
+                        <outlet property="lowSlider" destination="fdW-eO-msK" id="5EV-gF-yEC"/>
+                        <outlet property="maxSlideLabel" destination="XLn-JW-waw" id="9PE-CS-7te"/>
+                        <outlet property="maxSlider" destination="EkV-LI-Mgg" id="fBv-YF-6SK"/>
+                        <outlet property="midSlideLabel" destination="eau-9g-MtG" id="le9-PO-EuQ"/>
+                        <outlet property="midSlider" destination="da8-J4-hIn" id="mCz-yk-oWM"/>
                         <outlet property="themeLabel" destination="xWU-2S-lk0" id="L7n-KX-Z5Y"/>
                         <outlet property="themeSwitch" destination="B7A-gg-LYj" id="Hei-ZF-jAG"/>
                     </connections>

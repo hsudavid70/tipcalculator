@@ -19,6 +19,12 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeSwitch: UISwitch!
     @IBOutlet weak var defTipSelect: UISegmentedControl!
+    @IBOutlet weak var lowSlideLabel: UILabel!
+    @IBOutlet weak var midSlideLabel: UILabel!
+    @IBOutlet weak var maxSlideLabel: UILabel!
+    @IBOutlet weak var lowSlider: UISlider!
+    @IBOutlet weak var midSlider: UISlider!
+    @IBOutlet weak var maxSlider: UISlider!
     
     override func viewDidLoad() {
         println("lifcycle: (Settings) viewDidLoad")
@@ -116,5 +122,43 @@ class SettingsViewController: UIViewController {
             defaults.synchronize()
             themeLabel.text="Light Theme"
             lightColorTheme()        }
+    }
+    
+    
+    @IBAction func lowSlideChanged(sender: UISlider) {
+        let sliderVal = String(Int(lowSlider.value*100))
+        lowSlideLabel.text = sliderVal + "%"
+        if(lowSlider.value >= midSlider.value){
+            midSlider.value = lowSlider.value
+            midSlideLabel.text = String(Int(midSlider.value*100)) + "%"
+        }
+        if(lowSlider.value >= maxSlider.value){
+            maxSlider.value = lowSlider.value
+            maxSlideLabel.text = String(Int(maxSlider.value*100)) + "%"
+        }
+    }
+    @IBAction func midSlideChanged(sender: UISlider) {
+        let sliderVal = String(Int(midSlider.value*100))
+        midSlideLabel.text = sliderVal + "%"
+        if(midSlider.value >= maxSlider.value){
+            maxSlider.value = midSlider.value
+            maxSlideLabel.text = String(Int(maxSlider.value*100)) + "%"
+        }
+        if(midSlider.value <= lowSlider.value){
+            lowSlider.value = midSlider.value
+            lowSlideLabel.text = String(Int(lowSlider.value*100)) + "%"
+        }
+    }
+    @IBAction func maxSlideChanged(sender: UISlider) {
+        let sliderVal = String(Int(maxSlider.value*100))
+        maxSlideLabel.text = sliderVal + "%"
+        if(maxSlider.value <= midSlider.value){
+            midSlider.value = maxSlider.value
+            midSlideLabel.text = String(Int(midSlider.value*100)) + "%"
+        }
+        if(maxSlider.value <= lowSlider.value){
+            lowSlider.value = maxSlider.value
+            lowSlideLabel.text = String(Int(lowSlider.value*100)) + "%"
+        }
     }
 }
