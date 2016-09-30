@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let numFormatter = NSNumberFormatter()
+    let tipPercents = [10,20,30]
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
     @IBOutlet weak var tipStepper: UIStepper!
@@ -111,10 +112,15 @@ class ViewController: UIViewController {
         let savedIndex = getSavedTip()
         /* index is set to -1 to indicate reset or indeterminate state.  The default selection will be loaded */
         if(savedIndex != -1){
+         
             tipSelect.selectedSegmentIndex = getSavedTip()
+           
         }
         else{
+            // rest from settings
             tipSelect.selectedSegmentIndex = getDefTip()
+            tipRateValLabel.text = String(tipPercents[tipSelect.selectedSegmentIndex]) + "%"
+            tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
         }
         update_bill()
     }
@@ -264,7 +270,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func segValueChanged(sender: UISegmentedControl) {
-        let tipPercents = [10,20,30]
+      
         tipRateValLabel.text = String(tipPercents[tipSelect.selectedSegmentIndex]) + "%"
         tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
         update_bill()
