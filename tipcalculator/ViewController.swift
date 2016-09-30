@@ -261,6 +261,7 @@ class ViewController: UIViewController {
     
     @IBAction func segValueChanged(sender: UISegmentedControl) {
         let tipPercents = [10,20,30]
+        tipRateValLabel.text = String(tipPercents[tipSelect.selectedSegmentIndex]) + "%"
         tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
         update_bill()
         
