@@ -66,6 +66,10 @@ class ViewController: UIViewController {
         if(lastStoppedTime != 0 && (timeviewDidLoad - lastStoppedTime) < 600){
             // load from saved state
             keyInputField.text = defaults.stringForKey("savedInput")
+            tipStepper.value = defaults.doubleForKey("tipStepperVal")
+            peopleStepper.value = defaults.doubleForKey("peopleStepperVal")
+            tipRateValLabel.text = Int(tipStepper.value).description + "%"
+            numPeopleValLabel.text = Int(peopleStepper.value).description
             
         }
         else{
@@ -283,6 +287,8 @@ class ViewController: UIViewController {
          defaults.setInteger(timeTerminate, forKey: "lastStoppedTime")
          defaults.setObject(keyInputField.text, forKey:"savedInput")
          defaults.setInteger(tipSelect.selectedSegmentIndex, forKey: "savedSegIndex")
+         defaults.setDouble(tipStepper.value, forKey: "tipStepperVal")
+         defaults.setDouble(peopleStepper.value, forKey: "peopleStepperVal")
          defaults.synchronize()
         
     }
