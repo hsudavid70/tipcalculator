@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/bKFjXFY.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/H9Gseax.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -39,9 +39,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Challenges:
 
-Impelmenting the locale changes and state saving across restarts required looking up references regarding
-lifecycle handling, considerable amount of development time was spent on testing / debugging the lifecycle
-handling.
+Getting the right lifecycle handling function for implementing the locale change and saving states
+across restarts required some research of the documentation. Considerable amount of time was spent
+testing / debugging lifecycle handling.
 
 This program was developed using Swift 1.2 and tested on iOS simulator with iOS 8.4
 
