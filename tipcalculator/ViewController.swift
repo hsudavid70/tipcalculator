@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     let defaults = NSUserDefaults.standardUserDefaults()
     let numFormatter = NSNumberFormatter()
-    let tipPercents = [10,20,30]
+    var tipPresets : [Float] = [0.10,0.20,0.30]
     
     @IBOutlet weak var tipSelect: UISegmentedControl!
     @IBOutlet weak var tipStepper: UIStepper!
@@ -79,6 +79,8 @@ class ViewController: UIViewController {
             tipValLabel.text = numFormatter.stringFromNumber(0)
             totalValLabel.text = numFormatter.stringFromNumber(0)
         }
+        
+       
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -92,11 +94,8 @@ class ViewController: UIViewController {
         
         UIView.animateWithDuration(0.7, animations: {
             // This causes first view to fade in and second view to fade out
-            
             self.billField.alpha = 1
             self.tipSelect.alpha = 1
-          
-            
         })
         
         var colorTheme = defaults.stringForKey("tipColorTheme") ?? "Light"
@@ -108,20 +107,18 @@ class ViewController: UIViewController {
        
             darkColorTheme()
         }
-        
+        tipPresets = getPresets()
         let savedIndex = getSavedTip()
         /* index is set to -1 to indicate reset or indeterminate state.  The default selection will be loaded */
-        if(savedIndex != -1){
-         
-            tipSelect.selectedSegmentIndex = getSavedTip()
-           
-        }
-        else{
-            // rest from settings
-            tipSelect.selectedSegmentIndex = getDefTip()
-            tipRateValLabel.text = String(tipPercents[tipSelect.selectedSegmentIndex]) + "%"
-            tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
-        }
+        
+        tipSelect.selectedSegmentIndex = (savedIndex != -1) ? getSavedTip() : getDefTip()
+        
+        tipSelect.setTitle(String(Int(tipPresets[0]*100))+"%", forSegmentAtIndex: 0)
+        tipSelect.setTitle(String(Int(tipPresets[1]*100))+"%", forSegmentAtIndex: 1)
+        tipSelect.setTitle(String(Int(tipPresets[2]*100))+"%", forSegmentAtIndex: 2)
+        
+        tipRateValLabel.text = String(Int(tipPresets[tipSelect.selectedSegmentIndex]*100)) + "%"
+        tipStepper.value = Double(Int(tipPresets[tipSelect.selectedSegmentIndex]*100))
         update_bill()
     }
 
@@ -203,12 +200,9 @@ class ViewController: UIViewController {
         tipRateValLabel.textColor = UIColor.blackColor()
         numPeopleLabel.textColor = UIColor.blackColor()
         numPeopleValLabel.textColor = UIColor.blackColor()
-       
-        
     }
     
     func darkColorTheme(){
- 
         self.view.backgroundColor = UIColor(red:0.1,green:0.1,blue:0.1,alpha:1.0)
         billField.backgroundColor = UIColor.blackColor()
         billField.textColor = UIColor.whiteColor()
@@ -229,8 +223,6 @@ class ViewController: UIViewController {
     
     func update_bill(){
         
-        
-        
         // The String->Double conversion for Swift 1.2
         let keyInputVal = (keyInputField.text as NSString).doubleValue
         let tip = keyInputVal/100 * tipStepper.value/100
@@ -245,6 +237,16 @@ class ViewController: UIViewController {
         
     }
     
+    func getPresets()->[Float]{
+        if(checkKey("tip_preset_array")){
+            return defaults.arrayForKey("tip_preset_array") as! [Float]
+        }
+        else{
+            defaults.setObject([0.10,0.20,0.30], forKey: "tip_preset_array")
+            defaults.synchronize()
+            return [0.10,0.20,0.30]
+        }
+    }
     
     @IBAction func onTap(sender: AnyObject) {
         //view.endEditing(true)
@@ -271,9 +273,8 @@ class ViewController: UIViewController {
     
     @IBAction func segValueChanged(sender: UISegmentedControl) {
       
-        tipRateValLabel.text = String(tipPercents[tipSelect.selectedSegmentIndex]) + "%"
-    
-        tipStepper.value = Double(tipPercents[tipSelect.selectedSegmentIndex])
+        tipRateValLabel.text = String(Int(tipPresets[tipSelect.selectedSegmentIndex]*100)) + "%"
+        tipStepper.value = Double(Int(tipPresets[tipSelect.selectedSegmentIndex]*100))
         update_bill()
         
     }

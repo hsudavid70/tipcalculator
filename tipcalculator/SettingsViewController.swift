@@ -12,7 +12,6 @@ class SettingsViewController: UIViewController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     var lastSelected : Int = 0
-  
     
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -48,15 +47,23 @@ class SettingsViewController: UIViewController {
             println("reset")
             defaults.setInteger(-1, forKey: "savedSegIndex")
             defaults.setInteger(defTipSelect.selectedSegmentIndex, forKey: "def_tip_index")
-            defaults.synchronize()
+           
         }
        
         println("(Settings) saved \(defTipSelect.selectedSegmentIndex)")
         
+        // always save changed preset value
+        defaults.setObject([
+            lowSlider.value,
+            midSlider.value,
+            maxSlider.value
+            ], forKey: "tip_preset_array")
+        
+        defaults.synchronize()
     }
     
     override func viewWillAppear(animated: Bool){
-        
+        let savedPresets = getPresets()
         self.view.alpha = 0
         UIView.animateWithDuration(0.7, animations: {
             self.view.alpha = 1
@@ -70,7 +77,19 @@ class SettingsViewController: UIViewController {
             themeSwitch.on = true
             darkColorTheme()
         }
-        themeLabel.text = "\(colorTheme) theme"    }
+        themeLabel.text = "\(colorTheme) theme"
+        
+        lowSlider.value = savedPresets[0]
+        midSlider.value = savedPresets[1]
+        maxSlider.value = savedPresets[2]
+        
+        lowSlideLabel.text = String(Int(savedPresets[0]*100)) + "%"
+        midSlideLabel.text = String(Int(savedPresets[1]*100)) + "%"
+        maxSlideLabel.text = String(Int(savedPresets[2]*100)) + "%"
+        defTipSelect.setTitle(lowSlideLabel.text, forSegmentAtIndex: 0)
+        defTipSelect.setTitle(midSlideLabel.text, forSegmentAtIndex: 1)
+        defTipSelect.setTitle(maxSlideLabel.text, forSegmentAtIndex: 2)
+    }
     
         // check if preference keys exist, if not , set default value to 10 %
     
@@ -86,6 +105,17 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    func getPresets()->[Float]{
+        if(checkKey("tip_preset_array")){
+            return defaults.arrayForKey("tip_preset_array") as! [Float]
+        }
+        else{
+            defaults.setObject([0.10,0.20,0.30], forKey: "tip_preset_array")
+            defaults.synchronize()
+            return [0.10,0.20,0.30]
+        }
+    }
+    
     // check if key exists
     func checkKey(userKey:String)->Bool{
         return defaults.objectForKey(userKey) != nil
@@ -97,6 +127,9 @@ class SettingsViewController: UIViewController {
         themeLabel.textColor = UIColor.blackColor()
         label1.textColor = UIColor.blackColor()
         label2.textColor = UIColor.blackColor()
+        lowSlideLabel.textColor = UIColor.blackColor()
+        midSlideLabel.textColor = UIColor.blackColor()
+        maxSlideLabel.textColor = UIColor.blackColor()
         
     }
     
@@ -106,6 +139,9 @@ class SettingsViewController: UIViewController {
         themeLabel.textColor = UIColor.whiteColor()
         label1.textColor = UIColor.whiteColor()
         label2.textColor = UIColor.whiteColor()
+        lowSlideLabel.textColor = UIColor.whiteColor()
+        midSlideLabel.textColor = UIColor.whiteColor()
+        maxSlideLabel.textColor = UIColor.whiteColor()
        
     }
    
@@ -124,7 +160,6 @@ class SettingsViewController: UIViewController {
             lightColorTheme()        }
     }
     
-    
     @IBAction func lowSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(lowSlider.value*100))
         lowSlideLabel.text = sliderVal + "%"
@@ -140,6 +175,7 @@ class SettingsViewController: UIViewController {
             defTipSelect.setTitle(maxSlideLabel.text,forSegmentAtIndex:2)
         }
     }
+    
     @IBAction func midSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(midSlider.value*100))
         midSlideLabel.text = sliderVal + "%"
@@ -155,6 +191,7 @@ class SettingsViewController: UIViewController {
             defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)
         }
     }
+    
     @IBAction func maxSlideChanged(sender: UISlider) {
         let sliderVal = String(Int(maxSlider.value*100))
         maxSlideLabel.text = sliderVal + "%"
@@ -167,6 +204,7 @@ class SettingsViewController: UIViewController {
         if(maxSlider.value <= lowSlider.value){
             lowSlider.value = maxSlider.value
             lowSlideLabel.text = String(Int(lowSlider.value*100)) + "%"
-            defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)        }
+            defTipSelect.setTitle(lowSlideLabel.text,forSegmentAtIndex:0)
+        }
     }
 }
